@@ -1,25 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import ThemeContext, { ThemeType } from "./contexts/theme/ThemeContext";
+import { Button } from "./components/button/Button";
+import { Container } from "./style";
+import "./App.css";
 
 function App() {
+  const [theme, setTheme] = useState<ThemeType>({
+    key: "light",
+    name: "Modo Claro",
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <Container themeContext={theme.key}>
+        <Button />
+      </Container>
+    </ThemeContext.Provider>
   );
 }
 
